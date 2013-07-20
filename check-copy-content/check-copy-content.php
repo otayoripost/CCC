@@ -1,21 +1,11 @@
 <?php
 /*
 Plugin Name: Check Copy Content(CCC)
-Plugin URI: http://www.kigurumi.asia
-Description: 本文がコピーされた時にメールを通知します。
+Plugin URI: https://github.com/kanakogi/CCC
+Description: 本文(the_content();)で出力された文がコピーされた時に、こっそりとメールで通知します。
 Author: Nakashima Masahiro
 Version: 0.1
 Author URI: http://www.kigurumi.asia
-*/
-/*
-参考：
-http://www.slideshare.net/yuka2py/wordpress-15359306
-http://show-web.jp/2012/08/12/ajax%E3%81%A7wordpress%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%82%92%E9%81%B7%E7%A7%BB%E3%81%9B%E3%81%9A%E8%A1%A8%E7%A4%BA%E3%81%95%E3%81%9B%E3%82%8B/
-http://takahashifumiki.com/web/programing/1978/
-
-作業メモ:
-sprintf("%s/js/", dirname(__FILE__)); //サーバー内パス
-plugins_url( 'check-copy-content/js/admin.js' ) //プラグインからのパス
 */
 class CheckCopyContent {
 	 
