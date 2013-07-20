@@ -1,14 +1,19 @@
 <?php
 /*
-Plugin Name: Check Copy Content(CCC)
+Plugin Name: Check Copy Contents(CCC)
 Plugin URI: https://github.com/kanakogi/CCC
 Description: 本文(the_content();)で出力された文がコピーされた時に、こっそりとメールで通知します。
 Author: Nakashima Masahiro
 Version: 0.1
 Author URI: http://www.kigurumi.asia
 */
-class CheckCopyContent {
-	 
+class CheckCopyContents {
+	
+	/***
+	 *  プロパティの宣言
+	***/
+    public $debug_mode = false;
+     
 	 
 	/**
 	 * constructor
@@ -20,7 +25,12 @@ class CheckCopyContent {
         {
             register_activation_hook(__FILE__, array(&$this, 'activationHook'));
         }
-        
+
+		
+		//管理画面について
+		add_action('admin_menu', array($this, 'ccc_admin_menu'));	 	 
+		
+
 		//contentへのフック
 		add_filter( 'the_content', array($this, 'filter_wrap_content') );
 		  
@@ -31,42 +41,11 @@ class CheckCopyContent {
 		add_action('wp_ajax_cccAjax', array($this, 'cccAjax'));
 		add_action('wp_ajax_nopriv_cccAjax', array($this, 'cccAjax'));	
 		
-		//管理画面についか
-		add_action('admin_menu', array($this, 'ccc_admin_menu'));	 	 
+				
 	}
 	
 	
-    /**
-     * プラグインが有効化されたときに実行されるメソッド
-     * @return void
-     */
-    public function activationHook()
-    {
-		//オプションを初期値
-        if (! get_option('ccc_plugin_value_mail'))
-        {	
-        	$admin_email = get_option('admin_email');
-            update_option('ccc_plugin_value_mail', $admin_email);
-        }
-        
-        if (! get_option('ccc_plugin_value_subject'))
-        {
-            update_option('ccc_plugin_value_subject', '[From:CCC]ブログがコピーされました');
-        }
-        
-        if (! get_option('ccc_plugin_value_reply'))
-        {
-			$url = get_bloginfo('url');
-			$url = parse_url($url);
-			$reply = 'no-reply@'.$url['host'];
-            update_option('ccc_plugin_value_reply', $reply);
-        }
 
-    }
-
-
-	
-	
 	    
     
     	
@@ -75,9 +54,7 @@ class CheckCopyContent {
 	***/
 	public function filter_wrap_content ( $content ) {
 		
-		$str = get_option('check_copy_content_option_value');
-		//$str = 'POKO';
-		echo '<div>'.$str.'</div>';
+	
 		
 		//the_content()をIDで囲む
 		echo '<div id="theContentWrap">';
@@ -88,11 +65,44 @@ class CheckCopyContent {
 	
 	
 	/***
-	 * headerにjsを読み込む
+	 * headerの処理
 	***/
 	public function filter_header(){
 		
-		$js_url = plugins_url( 'check-copy-content/js' );
+		//singleページのみ読み込み
+		if(is_single() || is_page()){
+			
+			
+			//ログインチェック
+			$login_flg = get_option('ccc_plugin_value_login_flg');
+	
+			//ログインユーザーも通知するなら
+			if( $login_flg == 1)
+			{
+				$this->use_CCC();
+			}
+			//ログインユーザーは通知しない
+			else
+			{
+				if( !is_user_logged_in() ){
+					$this->use_CCC();
+				}
+			}
+			
+		}
+				
+	}
+	
+	/***
+	 * 通知関数
+	***/
+	public function use_CCC(){
+		//記事情報
+		$postID = get_the_ID();
+		$server_id = $_SERVER["REMOTE_ADDR"];
+		
+		//headerにjsを読み込む
+		$js_url = plugins_url( 'check-copy-contents/js' );
 		$js_selection_url = $js_url.'/jquery.selection.js';
 		$js_style_url = $js_url.'/style.js';
 		
@@ -102,10 +112,12 @@ class CheckCopyContent {
 		wp_enqueue_script('ccc-onload', $js_style_url, array('jquery'));
 		wp_localize_script('ccc-onload', 'CCC', array(
 	        'endpoint' => admin_url('admin-ajax.php'),
-			'action' => 'cccAjax'
+			'action' => 'cccAjax',
+			'postID' => $postID,
+			'server_id' => $server_id
 	    ));
-		
 	}
+	
 	
 	
 	/***
@@ -118,15 +130,26 @@ class CheckCopyContent {
 		$copyText = htmlspecialchars($copyText, ENT_QUOTES);
 		$post_url = $_POST['url'];
 		$post_url = htmlspecialchars($post_url, ENT_QUOTES);
+		$postID = $_POST['postID'];
+		$server_id = $_POST['server_id'];
+		$server_id = htmlspecialchars($server_id, ENT_QUOTES);
+		
+		//文字数チェック
+		$str_num = mb_strlen( $copyText );
+		$letters = get_option('ccc_plugin_value_letters');
+		if( $letters > $str_num ){
+			return ;
+		}
 		
 		
 		//補足データ作成
-		$server_id = $_SERVER["REMOTE_ADDR"];
 		$server_remote = $_SERVER["HTTP_USER_AGENT"];
 		$time = date( "Y/m/d (D) H:i:s", time() );
 		
+		
 		//TODO: データを保存
-
+		//add_post_meta( $postID, 'ccc_plugin_value_copytext', $copyText );
+		
 
 		//メール用のデータ作成
 		$mail = get_option('ccc_plugin_value_mail');
@@ -150,17 +173,20 @@ mail_body__END;
 
 		
 		//メール送信
-		$result = wp_mail( $mail,$subject, $mail_body, $reply );
+		if(!$this->debug_mode){
+			$result = wp_mail( $mail,$subject, $mail_body, $reply );			
+		}
 
-		/*
-		//json出力
-		$charset = get_bloginfo( 'charset' );
-		$array = array( 'massage' => $copyText, 'result' => $result  );
-		$json = json_encode( $array );
-		nocache_headers();
-		header( "Content-Type: application/json; charset=$charset" );
-		echo $json;
-		*/
+		//デバッグ用のjson出力
+		if($this->debug_mode){
+			$charset = get_bloginfo( 'charset' );
+			$array = array( 'massage' => $copyText, 'result' => $result, 'debug' => $this->debug_mode  );
+			$json = json_encode( $array );
+			nocache_headers();
+			header( "Content-Type: application/json; charset=$charset" );
+			echo $json;
+		}
+		
 		die();
 	}
 	
@@ -192,9 +218,49 @@ mail_body__END;
 		include(sprintf("%s/views/admin.php", dirname(__FILE__)));
 	}	
 	
-	
+
+
+    /**
+     * プラグインが有効化されたときに実行されるメソッド
+     * @return void
+     */
+    public function activationHook()
+    {
+		//オプションを初期値
+        if (! get_option('ccc_plugin_value_mail'))
+        {	
+        	$admin_email = get_option('admin_email');
+            update_option('ccc_plugin_value_mail', $admin_email);
+        }
+        
+        if (! get_option('ccc_plugin_value_subject'))
+        {
+            update_option('ccc_plugin_value_subject', '[From:CCC]ブログがコピーされました');
+        }
+        
+        if (! get_option('ccc_plugin_value_reply'))
+        {
+			$url = get_bloginfo('url');
+			$url = parse_url($url);
+			$reply = 'no-reply@'.$url['host'];
+            update_option('ccc_plugin_value_reply', $reply);
+        }
+		
+		//文字数
+		if (! get_option('ccc_plugin_value_letters'))
+        {
+            update_option('ccc_plugin_value_letters', 30);
+        }
+        
+        //ログインしてたらメールしない
+        if (! get_option('ccc_plugin_value_login_flg'))
+        {
+            update_option('ccc_plugin_value_login_flg', 1);
+        }
+    }
+    	
 }
-$CheckCopyContent = new CheckCopyContent();
+$CheckCopyContents = new CheckCopyContents();
 
 
 
