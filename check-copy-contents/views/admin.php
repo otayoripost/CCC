@@ -92,7 +92,7 @@ $login_flg = get_option('ccc_plugin_value_login_flg');
 
 
 <div>
-<h1>CCC <span style="font-size:80%;">(Check Copy Contents)</span><?php _e('設定画面', $this->textdomain );?></h1>
+<h1>CCC <span style="font-size:80%;">(Check Copy Contents)</span><?php _e('Setting screen', $this->textdomain );?></h1>
 
 <?php echo $errorList; ?>
 
@@ -101,16 +101,16 @@ $login_flg = get_option('ccc_plugin_value_login_flg');
 <tbody>
 	<tr>
 		<th>
-			<?php _e('通知先のメールアドレス', $this->textdomain );?>
+			<?php _e('Mail address to send notification', $this->textdomain );?>
 		</th>
 		<td>
 			<input type="text" name="mail" value="<?php echo $mail; ?>" class="p80" />
-			<div class="supp"><?php _e('例：abcd@hoge.com', $this->textdomain );?></div>
+			<div class="supp"><?php _e('Ex：abcd@hoge.com', $this->textdomain );?></div>
 		</td>
 	</tr>
 	<tr>
 		<th>
-			<?php _e('通知メールの件名', $this->textdomain );?>
+			<?php _e('Subject of notification mail', $this->textdomain );?>
 		</th>
 		<td>
 			<input type="text" name="subject" value="<?php echo $subject; ?>" class="p80" />
@@ -118,25 +118,25 @@ $login_flg = get_option('ccc_plugin_value_login_flg');
 	</tr>
 	<tr>
 		<th>
-			<?php _e('通知メールのアドレス', $this->textdomain );?>
+			<?php _e('Address of notification mail', $this->textdomain );?>
 		</th>
 		<td>
 			<input type="text" name="reply" value="<?php echo $reply;?>" class="p80" />
-			<div class="supp"><?php _e('例：no-reply@hoge.com', $this->textdomain );?></div>
+			<div class="supp"><?php _e('Ex：no-reply@hoge.com', $this->textdomain );?></div>
 		</td>
 	</tr>
 	<tr>
 		<th>
-			<?php _e('感知する文字数', $this->textdomain );?>
+			<?php _e('Character quantity to detect', $this->textdomain );?>
 		</th>
 		<td>
-			<input type="text" name="letters" value="<?php echo $letters; ?>" class="p20" /> <?php _e('文字以上', $this->textdomain );?>
-			<div class="supp"><?php _e('この文字数以上がコピーされた時に通知メールをします。', $this->textdomain );?></div>
+			<input type="text" name="letters" value="<?php echo $letters; ?>" class="p20" /> <?php _e('characters or more', $this->textdomain );?>
+			<div class="supp"><?php _e('Notification is sent when this number of characters or greater is copied.', $this->textdomain );?></div>
 		</td>
 	</tr>
 	<tr>
 		<th>
-			<?php _e('ログインユーザーの時の通知', $this->textdomain );?>
+			<?php _e('Notification based on login user operation', $this->textdomain );?>
 		</th>
 		<td>
 
@@ -144,22 +144,22 @@ $login_flg = get_option('ccc_plugin_value_login_flg');
 if ($login_flg == 1)
 {
 	echo  '<input type="checkbox" name="login_flg" value="1" checked> ';
-	_e('通知する', $this->textdomain );
+	_e('Notify', $this->textdomain );
 }
 else if($login_flg != 1)
 {
 	echo '<input type="checkbox" name="login_flg" value="1" > ';
-	_e('通知する', $this->textdomain );		
+	_e('Notify', $this->textdomain );		
 }
 ?>			
 
-		<div class="supp"><?php _e('ログインしているユーザーがコピーした時に通知します。', $this->textdomain );?></div>
+		<div class="supp"><?php _e('"Notification is sent when the logged in user copies.', $this->textdomain );?></div>
 		</td>
 	</tr>
 </tbody>	
 </table>
 <p style="text-align:center;">
-<input type="submit" value="<?php _e('登録', $this->textdomain ); ?>" />
+<input type="submit" value="<?php _e('Register', $this->textdomain ); ?>" />
 </p>
 </form>
 </div>

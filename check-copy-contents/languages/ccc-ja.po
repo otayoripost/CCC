@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-03-06 12:00+0900\n"
 "POT-Creation-Date: 2012-04-19 14:58+0900\n"
-"PO-Revision-Date: 2013-07-21 14:48+0900\n"
+"PO-Revision-Date: 2013-07-21 23:19+0900\n"
 "Last-Translator: Nakashima Masahiro <kanakogi@gmail.com>\n"
 "Language-Team: JAPANESE\n"
 "MIME-Version: 1.0\n"
@@ -18,53 +18,54 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 
 # activation
-msgid "[From:CCC]ブログのコピー通知"
-msgstr ""
+msgid "Blog copy notification"
+msgstr "[From:CCC]ブログのコピー通知"
 
 # check-copy-contents.php
-msgid "CCC設定"
-msgstr ""
+msgid "CCC settings"
+msgstr "CCC設定"
 
 # for Mail
-msgid "以下の本文がコピーされたようです。"
-msgstr ""
+msgid "It appears that the following characters have been copied"
+msgstr "以下の本文がコピーされたようです。"
 
 # views/admin.php
-msgid "設定画面"
+msgid "Setting screen"
 msgstr "設定画面"
 
-msgid "通知先のメールアドレス"
-msgstr ""
+msgid "Mail address to send notification"
+msgstr "通知先のメールアドレス"
 
-msgid "例：abcd@hoge.com"
-msgstr ""
+msgid "Ex: abcd@hoge.com"
+msgstr "例：abcd@hoge.com"
 
-msgid "通知メールの件名"
-msgstr ""
+msgid "Subject of notification mail"
+msgstr "通知メールの件名"
 
-msgid "通知メールのアドレス"
-msgstr ""
+msgid "Address of notification mail"
+msgstr "通知メールのアドレス"
 
-msgid "例：no-reply@hoge.com"
-msgstr ""
+msgid "Ex: no-reply@hoge.com"
+msgstr "例：no-reply@hoge.com"
 
-msgid "感知する文字数"
-msgstr ""
+msgid "Character quantity to detect"
+msgstr "感知する文字数"
 
-msgid "文字以上"
-msgstr ""
+msgid "characters or more"
+msgstr "文字以上"
 
-msgid "この文字数以上がコピーされた時に通知メールをします。"
-msgstr ""
+msgid ""
+"Notification is sent when this number of characters or greater is copied."
+msgstr "この文字数以上がコピーされた時に通知メールをします。"
 
-msgid "ログインユーザーの時の通知"
-msgstr ""
+msgid "Notification based on login user operation"
+msgstr "ログインユーザーの時の通知"
 
-msgid "通知する"
-msgstr ""
+msgid "Notify"
+msgstr "通知する"
 
-msgid "ログインしているユーザーがコピーした時に通知します。"
-msgstr ""
+msgid "Notification is sent when the logged in user copies."
+msgstr "ログインしているユーザーがコピーした時に通知します。"
 
-msgid "登録"
-msgstr ""
+msgid "Register"
+msgstr "登録"

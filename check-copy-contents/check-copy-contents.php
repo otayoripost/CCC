@@ -175,7 +175,7 @@ class CheckCopyContents {
 		$reply = get_option('ccc_plugin_value_reply');
 		
 		//メール文取得
-		$mailTmp01 =  __('以下の本文がコピーされたようです。', $this->textdomain );	
+		$mailTmp01 =  __('It appears that the following characters have been copie', $this->textdomain );	
 
 $mail_body=<<<mail_body__END
 ---------------------------------------------------
@@ -221,7 +221,7 @@ mail_body__END;
 	public function ccc_admin_menu(){
 		add_menu_page(
 			'Check Copy Content', //HTMLページのタイトル
-			__('CCC設定', $this->textdomain ),//管理画面のメニュー
+			__('CCC settings', $this->textdomain ),//管理画面のメニュー
 			'manage_options', //ユーザーレベル
 			'Check_Copy_Content_admin_menu', //URLに入る名前
 			array($this,'ccc_edit_setting')//機能を提供する関数
@@ -268,7 +268,7 @@ mail_body__END;
         
         if (! get_option('ccc_plugin_value_subject'))
         {
-            update_option('ccc_plugin_value_subject', __('[From:CCC]ブログのコピー通知', $this->textdomain ) );
+            update_option('ccc_plugin_value_subject', __('Blog copy notification', $this->textdomain ) );
         }
 
         if (! get_option('ccc_plugin_value_reply'))
