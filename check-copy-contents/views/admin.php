@@ -84,95 +84,83 @@ $login_flg = get_option('ccc_plugin_value_login_flg');
 
 
 //出力
-$echo = '';
-$echo .= <<<EOD
-<link rel="stylesheet/less" href="{$less_url}" />
+?>
+
+<link rel="stylesheet/less" href="<?php echo $less_url; ?>" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.3.3/less.min.js" type="text/javascript"></script>
 
 
-<div>
-<h1>CCC <span style="font-size:80%;">(Check Copy Contents)</span>設定画面</h1>
 
-{$errorList}
+<div>
+<h1>CCC <span style="font-size:80%;">(Check Copy Contents)</span><?php _e('設定画面', $this->textdomain );?></h1>
+
+<?php echo $errorList; ?>
 
 <form action="" method="post">
 <table class="type01">
 <tbody>
 	<tr>
 		<th>
-			通知先のメールアドレス
+			<?php _e('通知先のメールアドレス', $this->textdomain );?>
 		</th>
 		<td>
-			<input type="text" name="mail" value="{$mail}" class="p80" />
-			<div class="supp">例：abcd@hoge.com</div>
+			<input type="text" name="mail" value="<?php echo $mail; ?>" class="p80" />
+			<div class="supp"><?php _e('例：abcd@hoge.com', $this->textdomain );?></div>
 		</td>
 	</tr>
 	<tr>
 		<th>
-			通知メールの件名
+			<?php _e('通知メールの件名', $this->textdomain );?>
 		</th>
 		<td>
-			<input type="text" name="subject" value="{$subject}" class="p80" />
+			<input type="text" name="subject" value="<?php echo $subject; ?>" class="p80" />
 		</td>
 	</tr>
 	<tr>
 		<th>
-			通知メールのアドレス
+			<?php _e('通知メールのアドレス', $this->textdomain );?>
 		</th>
 		<td>
-			<input type="text" name="reply" value="{$reply}" class="p80" />
-			<div class="supp">例：no-reply@hoge.com</div>
+			<input type="text" name="reply" value="<?php echo $reply;?>" class="p80" />
+			<div class="supp"><?php _e('例：no-reply@hoge.com', $this->textdomain );?></div>
 		</td>
 	</tr>
 	<tr>
 		<th>
-			感知する文字数
+			<?php _e('感知する文字数', $this->textdomain );?>
 		</th>
 		<td>
-			<input type="text" name="letters" value="{$letters}" class="p20" /> 文字以上
-			<div class="supp">この文字数以上がコピーされた時に通知メールをします。</div>
+			<input type="text" name="letters" value="<?php echo $letters; ?>" class="p20" /> <?php _e('文字以上', $this->textdomain );?>
+			<div class="supp"><?php _e('この文字数以上がコピーされた時に通知メールをします。', $this->textdomain );?></div>
 		</td>
 	</tr>
 	<tr>
 		<th>
-			ログインユーザーの時の通知
+			<?php _e('ログインユーザーの時の通知', $this->textdomain );?>
 		</th>
 		<td>
-EOD;
 
+<?php
 if ($login_flg == 1)
 {
-	$echo .= '<input type="checkbox" name="login_flg" value="1" checked> 通知する';
+	echo  '<input type="checkbox" name="login_flg" value="1" checked> ';
+	_e('通知する', $this->textdomain );
 }
 else if($login_flg != 1)
 {
-	$echo .= '<input type="checkbox" name="login_flg" value="1" > 通知する';		
+	echo '<input type="checkbox" name="login_flg" value="1" > ';
+	_e('通知する', $this->textdomain );		
 }
-			
-$echo .= <<<EOD
-		<div class="supp">ログインしているユーザーがコピーした時に通知します。</div>
+?>			
+
+		<div class="supp"><?php _e('ログインしているユーザーがコピーした時に通知します。', $this->textdomain );?></div>
 		</td>
 	</tr>
 </tbody>	
 </table>
 <p style="text-align:center;">
-<input type="submit" value="登録" />
+<input type="submit" value="<?php _e('登録', $this->textdomain ); ?>" />
 </p>
 </form>
 </div>
-EOD;
 
-echo $echo;
-
-
-
-
-/* DBの保存データ
-echo '<ul>';
-$posts = query_posts('meta_key=ccc_plugin_value_copytext');
-foreach ( $posts as $post ) {
-	echo '<li><a href="'.$post->ID.'">'.$post->post_title.'</a></li>';
-}
-echo '<ul>';
-*/
-?>

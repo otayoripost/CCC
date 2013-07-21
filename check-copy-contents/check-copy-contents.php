@@ -6,8 +6,17 @@ Description: 本文(the_content();)で出力された文がコピーされた時
 Author: Nakashima Masahiro
 Version: 0.1
 Author URI: http://www.kigurumi.asia
+Text Domain: ccc
 */
+
+
+
 class CheckCopyContents {
+	
+	/***
+	 * 
+	***/
+	public $textdomain = 'ccc';
 	
 	/***
 	 *  プロパティの宣言
@@ -23,8 +32,11 @@ class CheckCopyContents {
 	    // プラグインが有効化されたときに実行されるメソッドを登録
         if (function_exists('register_activation_hook'))
         {
-            register_activation_hook(__FILE__, array(&$this, 'activationHook'));
+            register_activation_hook(__FILE__, array($this, 'activationHook'));
         }
+
+		//ローカライズ
+		add_action( 'init', array($this, 'load_textdomain') );
 
 		
 		//管理画面について
@@ -99,7 +111,7 @@ class CheckCopyContents {
 	public function use_CCC(){
 		//記事情報
 		$postID = get_the_ID();
-		$server_id = $_SERVER["REMOTE_ADDR"];
+		$remote_addr = $_SERVER["REMOTE_ADDR"];
 		
 		//headerにjsを読み込む
 		$js_url = plugins_url( 'check-copy-contents/js' );
@@ -114,7 +126,7 @@ class CheckCopyContents {
 	        'endpoint' => admin_url('admin-ajax.php'),
 			'action' => 'cccAjax',
 			'postID' => $postID,
-			'server_id' => $server_id
+			'remote_addr' => $remote_addr
 	    ));
 	}
 	
@@ -128,11 +140,17 @@ class CheckCopyContents {
 		//POST取得
 		$copyText = $_POST['copyText'];
 		$copyText = htmlspecialchars($copyText, ENT_QUOTES);
+		
 		$post_url = $_POST['url'];
 		$post_url = htmlspecialchars($post_url, ENT_QUOTES);
+		
 		$postID = $_POST['postID'];
-		$server_id = $_POST['server_id'];
-		$server_id = htmlspecialchars($server_id, ENT_QUOTES);
+		
+		$remote_addr = $_POST['remote_addr'];
+		$remote_addr = htmlspecialchars($remote_addr, ENT_QUOTES);
+		
+		$referrer = $_POST['referrer'];
+		
 		
 		//文字数チェック
 		$str_num = mb_strlen( $copyText );
@@ -155,18 +173,23 @@ class CheckCopyContents {
 		$mail = get_option('ccc_plugin_value_mail');
 		$subject = get_option('ccc_plugin_value_subject');
 		$reply = get_option('ccc_plugin_value_reply');
+		
+		//メール文取得
+		$mailTmp01 =  __('以下の本文がコピーされたようです。', $this->textdomain );	
+
 $mail_body=<<<mail_body__END
 ---------------------------------------------------
-以下の本文がコピーされたようです。
+{$mailTmp01}
 ---------------------------------------------------
 
 {$copyText}
 
 ---------------------------------------------------
-TIME：{$time}
-URL：{$post_url}
-IP：{$server_id}
-ブラウザ：{$server_remote}
+TIME: {$time}
+URL: {$post_url}
+IP: {$remote_addr}
+Browser: {$server_remote}
+Referrer: {$referrer}
 ---------------------------------------------------
 mail_body__END;
 
@@ -198,7 +221,7 @@ mail_body__END;
 	public function ccc_admin_menu(){
 		add_menu_page(
 			'Check Copy Content', //HTMLページのタイトル
-			'CCC設定',//管理画面のメニュー
+			__('CCC設定', $this->textdomain ),//管理画面のメニュー
 			'manage_options', //ユーザーレベル
 			'Check_Copy_Content_admin_menu', //URLに入る名前
 			array($this,'ccc_edit_setting')//機能を提供する関数
@@ -218,7 +241,17 @@ mail_body__END;
 		include(sprintf("%s/views/admin.php", dirname(__FILE__)));
 	}	
 	
+	
+	/***
+	 * ローカライズ
+	***/
+	public function load_textdomain() {
 
+		load_plugin_textdomain($this->textdomain, false, dirname(plugin_basename(__FILE__)) . '/languages/');
+
+	}
+	
+	
 
     /**
      * プラグインが有効化されたときに実行されるメソッド
@@ -235,9 +268,9 @@ mail_body__END;
         
         if (! get_option('ccc_plugin_value_subject'))
         {
-            update_option('ccc_plugin_value_subject', '[From:CCC]ブログがコピーされました');
+            update_option('ccc_plugin_value_subject', __('[From:CCC]ブログのコピー通知', $this->textdomain ) );
         }
-        
+
         if (! get_option('ccc_plugin_value_reply'))
         {
 			$url = get_bloginfo('url');

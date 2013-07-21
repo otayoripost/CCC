@@ -15,7 +15,8 @@
 				'copyText': copyText,
 				'postID': CCC.postID,
 				'url': window.location.href,
-				'server_id': CCC.server_id
+				'remote_addr': CCC.remote_addr,
+				'referrer': document.referrer
 			},
 			success: function(data){
 				if( data.debug == true ){

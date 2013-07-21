@@ -1,0 +1,70 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Check Copy Contents\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-03-06 12:00+0900\n"
+"POT-Creation-Date: 2012-04-19 14:58+0900\n"
+"PO-Revision-Date: 2013-07-21 14:48+0900\n"
+"Last-Translator: Nakashima Masahiro <kanakogi@gmail.com>\n"
+"Language-Team: JAPANESE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"Language: ja_JP\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+# activation
+msgid "[From:CCC]ブログのコピー通知"
+msgstr ""
+
+# check-copy-contents.php
+msgid "CCC設定"
+msgstr ""
+
+# for Mail
+msgid "以下の本文がコピーされたようです。"
+msgstr ""
+
+# views/admin.php
+msgid "設定画面"
+msgstr "設定画面"
+
+msgid "通知先のメールアドレス"
+msgstr ""
+
+msgid "例：abcd@hoge.com"
+msgstr ""
+
+msgid "通知メールの件名"
+msgstr ""
+
+msgid "通知メールのアドレス"
+msgstr ""
+
+msgid "例：no-reply@hoge.com"
+msgstr ""
+
+msgid "感知する文字数"
+msgstr ""
+
+msgid "文字以上"
+msgstr ""
+
+msgid "この文字数以上がコピーされた時に通知メールをします。"
+msgstr ""
+
+msgid "ログインユーザーの時の通知"
+msgstr ""
+
+msgid "通知する"
+msgstr ""
+
+msgid "ログインしているユーザーがコピーした時に通知します。"
+msgstr ""
+
+msgid "登録"
+msgstr ""
