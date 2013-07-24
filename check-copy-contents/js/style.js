@@ -1,6 +1,6 @@
 (function($) {
 	
-	$("#theContentWrap").bind('copy', function() {
+	$(".theContentWrap-ccc").bind('copy', function() {
 
 		//選択中のテキスト取得
 		var copyText = $.selection();

@@ -2,7 +2,9 @@
 /*
 Plugin Name: Check Copy Contents(CCC)
 Plugin URI: https://github.com/kanakogi/CCC
-Description: 本文(the_content();)で出力された文がコピーされた時に、こっそりとメールで通知します。
+Description: 誰かが、あなたのブログの文章をコピーしたら、そのコピーされた箇所とページのURLを、こっそりとあなたにメールで通知します。
+その記事のどこに興味を持たれたのか、引用されているのはどの箇所なのかを知ることが出来ます。
+※注：コピーを通知する箇所は、本文( the_content(); )で出力された文章になります。
 Author: Nakashima Masahiro
 Version: 0.1
 Author URI: http://www.kigurumi.asia
@@ -66,13 +68,9 @@ class CheckCopyContents {
 	***/
 	public function filter_wrap_content ( $content ) {
 		
-	
-		
 		//the_content()をIDで囲む
-		echo '<div id="theContentWrap">';
-	    echo( $content );
-		echo '</div>';
-		
+		$content = '<div class="theContentWrap-ccc">'.$content."</div>";
+		return $content; 
 	}
 	
 	
@@ -219,7 +217,7 @@ mail_body__END;
 	 * 管理画面
 	***/
 	public function ccc_admin_menu(){
-		add_menu_page(
+		add_options_page(
 			'Check Copy Content', //HTMLページのタイトル
 			__('CCC settings', $this->textdomain ),//管理画面のメニュー
 			'manage_options', //ユーザーレベル

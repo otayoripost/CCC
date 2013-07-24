@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-03-06 12:00+0900\n"
 "POT-Creation-Date: 2012-04-19 14:58+0900\n"
-"PO-Revision-Date: 2013-07-24 19:06+0900\n"
+"PO-Revision-Date: 2013-07-24 19:04+0900\n"
 "Last-Translator: Nakashima Masahiro <kanakogi@gmail.com>\n"
 "Language-Team: JAPANESE\n"
 "MIME-Version: 1.0\n"
@@ -19,53 +19,54 @@ msgstr ""
 
 # activation
 msgid "Blog copy notification"
-msgstr "[From:CCC]ブログのコピー通知"
+msgstr "Blog copy notification"
 
 # check-copy-contents.php
 msgid "CCC settings"
-msgstr "CCC設定"
+msgstr "CCC settings"
 
 # for Mail
 msgid "It appears that the following characters have been copied"
-msgstr "以下の本文がコピーされたようです。"
+msgstr "It appears that the following characters have been copied"
 
 # views/admin.php
 msgid "Setting screen"
-msgstr "設定画面"
+msgstr "Setting screen"
 
 msgid "Mail address to send notification"
-msgstr "通知先のメールアドレス"
+msgstr "Mail address to send notification"
 
 msgid "Ex: abcd@hoge.com"
-msgstr "例：abcd@hoge.com"
+msgstr "Ex: abcd@hoge.com"
 
 msgid "Subject of notification mail"
-msgstr "通知メールの件名"
+msgstr "Subject of notification mail"
 
 msgid "Address of notification mail"
-msgstr "通知メールのアドレス"
+msgstr "Address of notification mail"
 
 msgid "Ex: no-reply@hoge.com"
-msgstr "例：no-reply@hoge.com"
+msgstr "Ex: no-reply@hoge.com"
 
 msgid "Character quantity to detect"
-msgstr "感知する文字数"
+msgstr "Character quantity to detect"
 
 msgid "characters or more"
-msgstr "文字以上"
+msgstr "characters or more"
 
 msgid ""
 "Notification is sent when this number of characters or greater is copied."
-msgstr "この文字数以上がコピーされた時に通知メールをします。"
+msgstr ""
+"Notification is sent when this number of characters or greater is copied."
 
 msgid "Notification based on login user operation"
-msgstr "ログインユーザーの時の通知"
+msgstr "Notification based on login user operation"
 
 msgid "Notify"
-msgstr "通知する"
+msgstr "Notify"
 
 msgid "Notification is sent when the logged in user copies."
-msgstr "ログインしているユーザーがコピーした時に通知します。"
+msgstr "Notification is sent when the logged in user copies."
 
 msgid "Register"
-msgstr "登録"
+msgstr "Register"

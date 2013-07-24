@@ -9,13 +9,10 @@ http://wpdocs.sourceforge.jp/%E3%83%87%E3%83%BC%E3%82%BF%E6%A4%9C%E8%A8%BC#Email
 /***
  * 初期変数
 ***/
+//エラー用
 $errors = array();
-
 //lessのURL
-$less_url = plugins_url( 'check-copy-contents/css/style.less?' );
-$time = time();
-$less_url = $less_url.$time;
-
+$less_url = plugins_url( 'check-copy-contents/css/style.less?' ).time();
 
 
 /***
@@ -90,8 +87,12 @@ $login_flg = get_option('ccc_plugin_value_login_flg');
 <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.3.3/less.min.js" type="text/javascript"></script>
 
 
-
-<div>
+<!-- .cccAdminWrap -->
+<div class="cccAdminWrap clearfix">
+	
+	
+<!-- .cccMainArea -->
+<div class="cccMainArea">
 <h1>CCC <span style="font-size:80%;">(Check Copy Contents)</span><?php _e('Setting screen', $this->textdomain );?></h1>
 
 <?php echo $errorList; ?>
@@ -105,7 +106,7 @@ $login_flg = get_option('ccc_plugin_value_login_flg');
 		</th>
 		<td>
 			<input type="text" name="mail" value="<?php echo $mail; ?>" class="p80" />
-			<div class="supp"><?php _e('Ex：abcd@hoge.com', $this->textdomain );?></div>
+			<div class="supp"><?php _e('Ex: abcd@hoge.com', $this->textdomain );?></div>
 		</td>
 	</tr>
 	<tr>
@@ -122,7 +123,7 @@ $login_flg = get_option('ccc_plugin_value_login_flg');
 		</th>
 		<td>
 			<input type="text" name="reply" value="<?php echo $reply;?>" class="p80" />
-			<div class="supp"><?php _e('Ex：no-reply@hoge.com', $this->textdomain );?></div>
+			<div class="supp"><?php _e('Ex: no-reply@hoge.com', $this->textdomain );?></div>
 		</td>
 	</tr>
 	<tr>
@@ -153,7 +154,7 @@ else if($login_flg != 1)
 }
 ?>			
 
-		<div class="supp"><?php _e('"Notification is sent when the logged in user copies.', $this->textdomain );?></div>
+		<div class="supp"><?php _e('Notification is sent when the logged in user copies.', $this->textdomain );?></div>
 		</td>
 	</tr>
 </tbody>	
@@ -163,4 +164,43 @@ else if($login_flg != 1)
 </p>
 </form>
 </div>
+<!-- /.cccMainArea -->
 
+
+<!-- .cccSideArea -->
+<div class="cccSideArea">
+<div class="cccSide">
+<div class="inner">
+
+
+<div class="box">
+このプラグインの詳しい説明はコチラ。
+<a href="http://www.kigurumi.asia/imake/2548/">http://www.kigurumi.asia/imake/2548/</a>	
+</div>
+
+
+<div class="box">
+プラグインが便利だと思ったら、
+<a target="_blank" href="http://www.amazon.co.jp/registry/wishlist/2TUGZOYJW8T4T/?_encoding=UTF8&camp=247&creative=7399&linkCode=ur2&tag=wpccc-22">ウィッシュリスト</a><img src="https://ir-jp.amazon-adsystem.com/e/ir?t=wpccc-22&l=ur2&o=9" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />	
+からプレゼントをいただけると嬉しいです。
+</div>
+
+
+<div class="box">
+<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fkigurumi.oihagi&amp;width=278&amp;height=62&amp;show_faces=false&amp;colorscheme=light&amp;stream=false&amp;show_border=false&amp;header=false&amp;appId=355939381181327" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:62px;" allowTransparency="true"></iframe>
+</div>
+
+<div class="box">
+<a href="https://twitter.com/intent/tweet?screen_name=kanakogi" class="twitter-mention-button" data-lang="ja" data-related="kanakogi">Tweet to @kanakogi</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>	
+</div>
+
+
+</div>
+</div>
+</div>
+<!-- /.cccSideArea -->
+
+
+</div>
+<!-- /.cccAdminWrap -->
