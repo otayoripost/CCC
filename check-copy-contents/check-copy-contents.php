@@ -86,15 +86,15 @@ class CheckCopyContents {
 			//ログインチェック
 			$login_flg = get_option('ccc_plugin_value_login_flg');
 	
-			//ログインユーザーも通知するなら
-			if( $login_flg == 1)
-			{
+			//非ログイン時
+			if( !is_user_logged_in() ){
 				$this->use_CCC();
 			}
-			//ログインユーザーは通知しない
 			else
 			{
-				if( !is_user_logged_in() ){
+				//ログインユーザーも通知するなら
+				if( $login_flg == 1)
+				{
 					$this->use_CCC();
 				}
 			}
