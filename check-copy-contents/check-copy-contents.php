@@ -172,12 +172,10 @@ class CheckCopyContents {
 		$subject = get_option('ccc_plugin_value_subject');
 		$reply = get_option('ccc_plugin_value_reply');
 		
-		//メール文取得
-		$mailTmp01 =  __('It appears that the following characters have been copie', $this->textdomain );	
 
 $mail_body=<<<mail_body__END
 ---------------------------------------------------
-{$mailTmp01}
+{$subject}
 ---------------------------------------------------
 
 {$copyText}
