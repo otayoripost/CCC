@@ -36,6 +36,17 @@ class CheckCopyContents {
         {
             register_activation_hook(__FILE__, array($this, 'activationHook'));
         }
+        //無効化
+        if (function_exists('register_deactivation_hook'))
+        {
+            register_deactivation_hook(__FILE__, array($this, 'deactivationHook'));
+        }
+        //アンインストール
+        if ( function_exists('register_uninstall_hook'))
+        {
+            register_uninstall_hook( __FILE__, array($this, 'uninstallHook'));
+		}
+        
 
 		//ローカライズ
 		add_action( 'init', array($this, 'load_textdomain') );
@@ -86,17 +97,18 @@ class CheckCopyContents {
 			//ログインチェック
 			$login_flg = get_option('ccc_plugin_value_login_flg');
 	
-			//非ログイン時
-			if( !is_user_logged_in() ){
-				$this->use_CCC();
-			}
-			else
+			//ログイン時
+			if( is_user_logged_in() )
 			{
 				//ログインユーザーも通知するなら
 				if( $login_flg == 1)
 				{
 					$this->use_CCC();
 				}
+			}
+			else
+			{
+				$this->use_CCC();	
 			}
 			
 		}
@@ -171,11 +183,11 @@ class CheckCopyContents {
 		$mail = get_option('ccc_plugin_value_mail');
 		$subject = get_option('ccc_plugin_value_subject');
 		$reply = get_option('ccc_plugin_value_reply');
-		
+		$underText = __('It appears that the following characters have been copied');
 
 $mail_body=<<<mail_body__END
 ---------------------------------------------------
-{$subject}
+{$underText}
 ---------------------------------------------------
 
 {$copyText}
@@ -264,7 +276,7 @@ mail_body__END;
         
         if (! get_option('ccc_plugin_value_subject'))
         {
-            update_option('ccc_plugin_value_subject', __('Blog copy notification', $this->textdomain ) );
+            update_option('ccc_plugin_value_subject', __('Blog copy notification', $this->textdomain));
         }
 
         if (! get_option('ccc_plugin_value_reply'))
@@ -287,6 +299,34 @@ mail_body__END;
             update_option('ccc_plugin_value_login_flg', 1);
         }
     }
+    
+    /***
+     * 無効化ときに実行
+    ***/
+    public function deactivationHook()
+    {
+
+    	delete_option('ccc_plugin_value_mail');
+		delete_option('ccc_plugin_value_subject');
+		delete_option('ccc_plugin_value_reply');
+		delete_option('ccc_plugin_value_letters');
+		delete_option('ccc_plugin_value_login_flg');
+
+    }
+    
+    /***
+     * アンインストール時
+    ***/
+    public function uninstallHook()
+    {
+    
+    	delete_option('ccc_plugin_value_mail');
+		delete_option('ccc_plugin_value_subject');
+		delete_option('ccc_plugin_value_reply');
+		delete_option('ccc_plugin_value_letters');
+		delete_option('ccc_plugin_value_login_flg');
+    }
+
     	
 }
 $CheckCopyContents = new CheckCopyContents();
