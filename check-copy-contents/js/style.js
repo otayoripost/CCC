@@ -4,7 +4,6 @@
 
 		//選択中のテキスト取得
 		var copyText = $.selection();
-		console.log(CCC.postID);
 		
 		//ajaxで送信
 		$.ajax({
@@ -24,9 +23,7 @@
 					$('#json-data').append(json_str);					
 				}
 			},
-			error: function(){
-				console.log('error');
-			}
+			error: function() {}
 		});
 		
 	});	
