@@ -36,8 +36,8 @@ msgstr "Setting screen"
 msgid "Mail address to send notification"
 msgstr "Mail address to send notification"
 
-msgid "Ex: abcd@hoge.com"
-msgstr "Ex: abcd@hoge.com"
+msgid "Ex: abcd@example.com"
+msgstr "Ex: abcd@example.com"
 
 msgid "Subject of notification mail"
 msgstr "Subject of notification mail"
@@ -45,8 +45,8 @@ msgstr "Subject of notification mail"
 msgid "Address of notification mail"
 msgstr "Address of notification mail"
 
-msgid "Ex: no-reply@hoge.com"
-msgstr "Ex: no-reply@hoge.com"
+msgid "Ex: no-reply@example.com"
+msgstr "Ex: no-reply@example.com"
 
 msgid "Character quantity to detect"
 msgstr "Character quantity to detect"
