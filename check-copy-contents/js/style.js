@@ -4,12 +4,10 @@
 
 		//選択中のテキスト取得
 		var copyText = $.selection();
-<<<<<<< HEAD
 		
 		//nonce取得
 		var nonce = $("input#ccc_nonce").val();
-=======
->>>>>>> c63a9b3b8f4afce488f1b30958338875c2b50c18
+
 		
 		//ajaxで送信
 		$.ajax({
