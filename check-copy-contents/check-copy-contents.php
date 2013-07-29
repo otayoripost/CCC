@@ -61,6 +61,10 @@ class CheckCopyContents {
 		  
 		//header()のフック
 		add_filter( 'wp_head', array($this, 'filter_header') );
+
+		//footer()のフッック
+		add_filter( 'wp_footer', array($this, 'filter_footer') );
+		
 		
 		//ajaxのアクション
 		add_action('wp_ajax_cccAjax', array($this, 'cccAjax'));
@@ -79,6 +83,7 @@ class CheckCopyContents {
 	***/
 	public function filter_wrap_content ( $content ) {
 		
+
 		//the_content()をIDで囲む
 		$content = '<div class="theContentWrap-ccc">'.$content."</div>";
 		return $content; 
@@ -114,6 +119,16 @@ class CheckCopyContents {
 		}
 				
 	}
+
+	/***
+	* footerの処理
+	***/
+	public function filter_footer(){
+
+		//nonceを付加
+		wp_nonce_field('ccc_nonce', 'ccc_nonce');
+
+	}
 	
 	/***
 	 * 通知関数
@@ -129,6 +144,7 @@ class CheckCopyContents {
 		$js_style_url = $js_url.'/style.js';
 		
 		//jsを読み込み
+		$nonce = wp_nonce_field('ccc_nonce','_wpnonce',true,false);
 		wp_enqueue_script('jquery');
 		wp_enqueue_script('ccc-onload1', $js_selection_url ) ;		
 		wp_enqueue_script('ccc-onload', $js_style_url, array('jquery'));
@@ -136,6 +152,7 @@ class CheckCopyContents {
 	        'endpoint' => admin_url('admin-ajax.php'),
 			'action' => 'cccAjax',
 			'postID' => $postID,
+			'nonce' => $nonce,
 			'remote_addr' => $remote_addr
 	    ));
 	}
@@ -160,7 +177,19 @@ class CheckCopyContents {
 		$remote_addr = htmlspecialchars($remote_addr, ENT_QUOTES);
 		
 		$referrer = $_POST['referrer'];
+		$nonce = $_POST['nonce'];
 		
+		//nonceチェック
+		if( wp_verify_nonce($_POST['nonce'], 'ccc_nonce')  )
+		{
+			$nonce = $_POST['nonce'];
+		}
+		else
+		{
+			//終了
+			return;
+		}
+
 		
 		//文字数チェック
 		$str_num = mb_strlen( $copyText );
@@ -211,7 +240,7 @@ mail_body__END;
 		//デバッグ用のjson出力
 		if($this->debug_mode){
 			$charset = get_bloginfo( 'charset' );
-			$array = array( 'massage' => $copyText, 'result' => $result, 'debug' => $this->debug_mode  );
+			$array = array( 'massage' => $copyText, 'result' => $result, 'debug' => $this->debug_mode, 'nonce' => $nonce  );
 			$json = json_encode( $array );
 			nocache_headers();
 			header( "Content-Type: application/json; charset=$charset" );

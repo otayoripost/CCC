@@ -4,7 +4,9 @@
 
 		//選択中のテキスト取得
 		var copyText = $.selection();
-		console.log(CCC.postID);
+		
+		//nonce取得
+		var nonce = $("input#ccc_nonce").val();
 		
 		//ajaxで送信
 		$.ajax({
@@ -16,7 +18,8 @@
 				'postID': CCC.postID,
 				'url': window.location.href,
 				'remote_addr': CCC.remote_addr,
-				'referrer': document.referrer
+				'referrer': document.referrer,
+				'nonce': nonce
 			},
 			success: function(data){
 				if( data.debug == true ){
@@ -24,9 +27,7 @@
 					$('#json-data').append(json_str);					
 				}
 			},
-			error: function(){
-				console.log('error');
-			}
+			error: function() {}
 		});
 		
 	});	
