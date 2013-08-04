@@ -2,13 +2,12 @@
 /*
 Plugin Name: Check Copy Contents(CCC)
 Plugin URI: https://github.com/kanakogi/CCC
-Description: 誰かが、あなたのブログの文章をコピーしたら、そのコピーされた箇所とページのURLを、こっそりとあなたにメールで通知します。
-その記事のどこに興味を持たれたのか、引用されているのはどの箇所なのかを知ることが出来ます。
-※注：コピーを通知する箇所は、本文( the_content(); )で出力された文章になります。
+Description: If someone reposts or quotes text content from your website, you'll get a discreet email letting you know, along with the sections quoted and the URL.
 Author: Nakashima Masahiro
-Version: 0.1
+Version: 1.0
 Author URI: http://www.kigurumi.asia
 Text Domain: ccc
+Domain Path: /languages/
 */
 
 
@@ -212,7 +211,7 @@ class CheckCopyContents {
 		$mail = get_option('ccc_plugin_value_mail');
 		$subject = get_option('ccc_plugin_value_subject');
 		$reply = get_option('ccc_plugin_value_reply');
-		$underText = __('It appears that the following characters have been copied');
+		$underText = __('It appears that the following characters have been copied', $this->textdomain);
 
 $mail_body=<<<mail_body__END
 ---------------------------------------------------
@@ -356,6 +355,25 @@ mail_body__END;
 		delete_option('ccc_plugin_value_login_flg');
     }
 
+
+	/**
+	 * WordPressの_eのエイリアス
+	 * @param string $text
+	 * @return void
+	 */
+	public function e($text){
+		_e($text, $this->textdomain);
+	}
+	
+	/**
+	 * WordPressの__のエイリアス
+	 * @param string $text
+	 * @return string
+	 */
+	public function _($text){
+		return __($text, $this->textdomain);
+	}
+	
     	
 }
 $CheckCopyContents = new CheckCopyContents();

@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-03-06 12:00+0900\n"
 "POT-Creation-Date: 2012-04-19 14:58+0900\n"
-"PO-Revision-Date: 2013-07-24 19:06+0900\n"
+"PO-Revision-Date: 2013-08-04 12:28+0900\n"
 "Last-Translator: Nakashima Masahiro <kanakogi@gmail.com>\n"
 "Language-Team: JAPANESE\n"
 "MIME-Version: 1.0\n"
@@ -69,3 +69,13 @@ msgstr "ログインしているユーザーがコピーした時に通知しま
 
 msgid "Register"
 msgstr "登録"
+
+msgid "The detailed explanation of this plug in is this url."
+msgstr "このプラグインの詳しい説明はコチラ。"
+
+msgid ""
+"If you find this plugin usefull, don't hesitate to buy me some present from "
+"<a href=\"%s\">my wishlist</a>."
+msgstr ""
+"プラグインが便利だと思ったら、<a href=\"%s\">ウィッシュリスト</a>からプレゼン"
+"トをいただけると嬉しいです。"

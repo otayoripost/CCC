@@ -106,7 +106,7 @@ $login_flg = get_option('ccc_plugin_value_login_flg');
 		</th>
 		<td>
 			<input type="text" name="mail" value="<?php echo $mail; ?>" class="p80" />
-			<div class="supp"><?php _e('Ex: abcd@hoge.com', $this->textdomain );?></div>
+			<div class="supp"><?php _e('Ex: abcd@example.com', $this->textdomain );?></div>
 		</td>
 	</tr>
 	<tr>
@@ -123,7 +123,7 @@ $login_flg = get_option('ccc_plugin_value_login_flg');
 		</th>
 		<td>
 			<input type="text" name="reply" value="<?php echo $reply;?>" class="p80" />
-			<div class="supp"><?php _e('Ex: no-reply@hoge.com', $this->textdomain );?></div>
+			<div class="supp"><?php _e('Ex: no-reply@example.com', $this->textdomain );?></div>
 		</td>
 	</tr>
 	<tr>
@@ -174,15 +174,16 @@ else if($login_flg != 1)
 
 
 <div class="box">
-このプラグインの詳しい説明はコチラ。
-<a href="http://www.kigurumi.asia/imake/2548/">http://www.kigurumi.asia/imake/2548/</a>	
+<?php _e('The detailed explanation of this plug in is this url.', $this->textdomain );?>
+<a href="http://www.kigurumi.asia/imake/2548/" target="_blank">http://www.kigurumi.asia/imake/2548/</a>	
 </div>
 
 
 <div class="box">
-プラグインが便利だと思ったら、
-<a target="_blank" href="http://www.amazon.co.jp/registry/wishlist/2TUGZOYJW8T4T/?_encoding=UTF8&camp=247&creative=7399&linkCode=ur2&tag=wpccc-22">ウィッシュリスト</a><img src="https://ir-jp.amazon-adsystem.com/e/ir?t=wpccc-22&l=ur2&o=9" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />	
-からプレゼントをいただけると嬉しいです。
+
+
+<?php printf($this->_('If you find this plugin usefull, don\'t hesitate to buy me some present from <a href="%s">my wishlist</a>.'), 'http://www.amazon.co.jp/registry/wishlist/2TUGZOYJW8T4T/?tag=wpccc-22'); ?>
+
 </div>
 
 
