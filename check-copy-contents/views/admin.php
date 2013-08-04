@@ -84,7 +84,8 @@ $login_flg = get_option('ccc_plugin_value_login_flg');
 ?>
 
 <link rel="stylesheet/less" href="<?php echo $less_url; ?>" />
-<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.3.3/less.min.js" type="text/javascript"></script>
+<script src="<?php echo plugins_url( 'check-copy-contents/js/less.min.js' ); ?>" type="text/javascript"></script>
+
 
 
 <!-- .cccAdminWrap -->
