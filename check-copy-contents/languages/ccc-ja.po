@@ -36,8 +36,8 @@ msgstr "設定画面"
 msgid "Mail address to send notification"
 msgstr "通知先のメールアドレス"
 
-msgid "Ex: abcd@hoge.com"
-msgstr "例：abcd@hoge.com"
+msgid "Ex: abcd@example.com"
+msgstr "例：abcd@example.com"
 
 msgid "Subject of notification mail"
 msgstr "通知メールの件名"
@@ -45,8 +45,8 @@ msgstr "通知メールの件名"
 msgid "Address of notification mail"
 msgstr "通知メールのアドレス"
 
-msgid "Ex: no-reply@hoge.com"
-msgstr "例：no-reply@hoge.com"
+msgid "Ex: no-reply@example.com"
+msgstr "例：no-reply@example.com"
 
 msgid "Character quantity to detect"
 msgstr "感知する文字数"
