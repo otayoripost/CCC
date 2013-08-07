@@ -4,13 +4,13 @@ Plugin Name: Check Copy Contents(CCC)
 Plugin URI: https://github.com/kanakogi/CCC
 Description: If someone reposts or quotes text content from your website, you'll get a discreet email letting you know, along with the sections quoted and the URL.
 Author: Nakashima Masahiro
-Version: 1.0
+Version: 1.0.1
 Author URI: http://www.kigurumi.asia
 Text Domain: ccc
 Domain Path: /languages/
 */
 
-
+//public define( 'CCC_PLUGIN_URL', untrailingslashit( plugins_url( '', __FILE__ ) ) );
 
 class CheckCopyContents {
 	
@@ -18,11 +18,13 @@ class CheckCopyContents {
 	 * 
 	***/
 	public $textdomain = 'ccc';
+	public $plugins_url = '';
 	
 	/***
 	 *  プロパティの宣言
 	***/
     public $debug_mode = false;
+    
      
 	 
 	/**
@@ -46,7 +48,10 @@ class CheckCopyContents {
             register_uninstall_hook( __FILE__, array($this, 'uninstallHook'));
 		}
         
-
+		//init
+		add_action( 'init', array($this, 'init') );
+		
+		
 		//ローカライズ
 		add_action( 'init', array($this, 'load_textdomain') );
 
@@ -73,8 +78,13 @@ class CheckCopyContents {
 	}
 	
 	
-
-	    
+	/**
+	 * init
+	 */
+	 public function init(){
+		$this->plugins_url = untrailingslashit( plugins_url( '', __FILE__ ) ); 
+	 }
+	   
     
     	
 	/***
@@ -138,7 +148,7 @@ class CheckCopyContents {
 		$remote_addr = $_SERVER["REMOTE_ADDR"];
 		
 		//headerにjsを読み込む
-		$js_url = plugins_url( 'check-copy-contents/js' );
+		$js_url = $this->plugins_url.'/js';
 		$js_selection_url = $js_url.'/jquery.selection.js';
 		$js_style_url = $js_url.'/style.js';
 		

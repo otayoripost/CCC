@@ -12,7 +12,8 @@ http://wpdocs.sourceforge.jp/%E3%83%87%E3%83%BC%E3%82%BF%E6%A4%9C%E8%A8%BC#Email
 //エラー用
 $errors = array();
 //lessのURL
-$less_url = plugins_url( 'check-copy-contents/css/style.less?' ).time();
+$less_url = $this->plugins_url.'/css/style.less?'.time();
+$less_min_url = $this->plugins_url.'/js/less.min.js';
 
 
 /***
@@ -84,7 +85,7 @@ $login_flg = get_option('ccc_plugin_value_login_flg');
 ?>
 
 <link rel="stylesheet/less" href="<?php echo $less_url; ?>" />
-<script src="<?php echo plugins_url( 'check-copy-contents/js/less.min.js' ); ?>" type="text/javascript"></script>
+<script src="<?php echo $less_min_url; ?>" type="text/javascript"></script>
 
 
 
