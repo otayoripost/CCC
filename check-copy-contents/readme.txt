@@ -4,7 +4,7 @@ Donate link: http://www.amazon.co.jp/registry/wishlist/2TUGZOYJW8T4T/?_encoding=
 Tags: copy, notice, mail, AJAX, post
 Requires at least: 3.0 or higher
 Tested up to: 3.5
-Stable tag: 1.0.1
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,7 +29,7 @@ Note 2: This plugin will work on full blog post pages and on static pages. It wi
 
 
 == Changelog ==
-**1.0.1 - August 7, 2013**  
+**1.1 - August 7, 2013**  
 Bug fix.
 
 **1.0.0 - July 24, 2013**  

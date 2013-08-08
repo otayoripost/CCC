@@ -4,7 +4,7 @@ Plugin Name: Check Copy Contents(CCC)
 Plugin URI: https://github.com/kanakogi/CCC
 Description: If someone reposts or quotes text content from your website, you'll get a discreet email letting you know, along with the sections quoted and the URL.
 Author: Nakashima Masahiro
-Version: 1.0.1
+Version: 1.1
 Author URI: http://www.kigurumi.asia
 Text Domain: ccc
 Domain Path: /languages/

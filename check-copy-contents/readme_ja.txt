@@ -2,9 +2,9 @@
 Contributors: kanakogi
 Donate link: http://www.amazon.co.jp/registry/wishlist/2TUGZOYJW8T4T/?_encoding=UTF8&camp=247&creative=7399&linkCode=ur2&tag=wpccc-22
 Tags: copy, notice, mail, AJAX, post
-Requires at least: 3.0
+Requires at least: 3.0 or higher
 Tested up to: 3.5
-Stable tag: 1.0.1
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,7 +27,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 
 == Changelog ==
-**1.0.1 - August 7, 2013**  
+**1.1 - August 7, 2013**  
 Bug fix.
 
 **1.0.0 - July 24, 2013**  
